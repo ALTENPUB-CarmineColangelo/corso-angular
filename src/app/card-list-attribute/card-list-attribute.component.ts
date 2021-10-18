@@ -3,7 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: '[app-card-list]',
   templateUrl: './card-list-attribute.component.html',
-  styleUrls: ['./card-list-attribute.component.css']
+  styles: [`
+    .card-title {
+      color: var(--bs-primary);
+    }
+  `]
 })
 export class CardListAttributeComponent {
   id ='5'
