@@ -1,74 +1,21 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Anaheim&family=Overpass+Mono:wght@700&display=swap');
-  :host {
-    font-family: 'Anaheim', sans-serif;
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Overpass Mono', monospace;
-  }
-
-  h1 {
-    font-size: 4rem;
-  }
-
-  p {
-    margin: 0;
-  }
-  .container-main-page {
-    background-color: #1B1464;
-    color: white;
-    height: 100vh;
-    width: 100%;
-    font-size: 1.35rem;
-  }
-</style>
-
-<!-- Toolbar -->
-<div class="container-fluid container-main-page d-flex flex-column align-items-center justify-content-center text-center px-lg-5">
-  <h1 class="mb-0 text-uppercase">
+<div class="container">
+  <h1>
     {{title}}
   </h1>
-  <h4 class="text-electric-purple">
-    versione {{ngVersion}}
-  </h4>
-  <div class="lead mb-5 text-electric-cyan">Introduzione base al framework</div>
-  <article class="mb-5">
-    <p>
-      Il corso ha lo scopo di accompagnare l'utente nella scoperta delle principali funzionalità di Angular
-    </p>
-    <p>Versione del corso {{courseVersion}}</p>
-  </article>
-  <section>
-    Libreria di stile <a href="https://getbootstrap.com/" target="_blank" class="text-electric-cyan">@Boostrap</a>
-  </section>
+  <p>
+    {{description}}
+  </p>
+  <div class="row">
+    <div class="col">
+      <app-card-list></app-card-list>
+    </div>
+    <div class="col">
+      <div app-card-list></div>
+    </div>
+    <div class="col">
+      <div class="app-card-list"></div>
+    </div>
+  </div>
 </div>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
