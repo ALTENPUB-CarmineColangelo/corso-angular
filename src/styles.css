@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-electric-cyan: #00FFC5;
+  --color-electric-purple: #EC008C;
+}
+
+.text-electric-cyan {
+  color: var(--color-electric-cyan);
+}
+.text-electric-purple {
+  color: var(--color-electric-purple);
+}
+
+.bg-electric-cyan {
+  background-color: var(--color-electric-cyan);
+}
+.bg-electric-purple {
+  background-color: var(--color-electric-purple);
+}
