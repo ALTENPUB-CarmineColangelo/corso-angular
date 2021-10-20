@@ -1,0 +1,19 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light px-5">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" (click)="onToggleMenuOpened()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" [class.show]="menuOpened" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+          <li *ngFor="let item of menuItems" class="nav-item active">
+            <a class="nav-link" routerLinkActive="active"
+               [routerLink]="item.path">{{item.label}}</a>
+          </li>
+        </ul>
+    </div>
+
+  </nav>
+</div>

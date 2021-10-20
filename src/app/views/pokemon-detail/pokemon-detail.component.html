@@ -1,0 +1,18 @@
+<div *ngIf="!loading">
+  <div class="d-flex flex-column justify-content-end text-center" [ngStyle]="{ background: 'url('+mainPic+') no-repeat bottom center', paddingTop: '25%', backgroundSize: 'contain'}">
+    <h1 class="display-1">
+      {{pokemon.name | titlecase}}
+    </h1>
+  </div>
+  <div class="row row-cols-2 row-cols-sm-4 row-cols-lg-6 g-3 flex-nowrap overflow-auto flex-row-reverse justify-content-center">
+    <div class="col" *ngFor="let pic of gallery">
+      <div class="card bg-dark text-white">
+        <img class="card-img" [src]="pic.src" alt="Card image">
+        <div class="card-img-overlay">
+          <h5 class="card-title">{{pic.key}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

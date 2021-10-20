@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
+  --header-height: 64px;
+  --footer-height: 32px;
+
   --color-electric-cyan: #00FFC5;
   --color-electric-purple: #EC008C;
 }

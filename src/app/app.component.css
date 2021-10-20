@@ -1,0 +1,9 @@
+.pokedex {
+  display: grid;
+  grid-template-rows: var(--header-height) auto var(--footer-height);
+  grid-template-columns: 100%;
+  min-height: 100vh;
+}
+main {
+  overflow-y: auto;
+}
