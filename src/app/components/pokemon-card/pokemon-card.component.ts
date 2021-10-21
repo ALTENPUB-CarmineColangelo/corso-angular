@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import {PokemonListItem} from "../../interfaces/PokemonListItem";
+import {PokemonListItem} from "../../views/pokemons-list/PokemonListItem.interface";
 
 @Component({
   selector: 'app-pokemon-card',

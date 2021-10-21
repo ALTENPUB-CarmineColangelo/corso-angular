@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">{{title}}</h5>
+  </div>
+  <div class="card-body">
+    <div class="row text-center g-3">
+      <div class="col" *ngFor="let pic of gallery">
+        <img class="img-fluid" [src]="pic.src" [alt]="pic.key">
+        <h5 class="card-title">{{pic.key}}</h5>
+      </div>
+    </div>
+  </div>
+</div>

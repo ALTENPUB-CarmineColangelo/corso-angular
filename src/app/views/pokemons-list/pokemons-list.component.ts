@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {GetAllPokemonsService} from "../../services/get-all-pokemons.service";
-import {PokemonListItem} from "../../interfaces/PokemonListItem";
 import {GetPokemonSpriteService} from "../../services/get-pokemon-sprite.service";
 import {Router} from "@angular/router";
 import {BaseResponse} from "../../interfaces/BaseResponse";
+import {PokemonListItem} from "./PokemonListItem.interface";
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,7 @@ export class PokemonsListComponent implements OnInit {
   _next: string;
   _previous: string;
   loading: boolean = false
-  limits: number[] = [5, 10, 25, 50, 100]
+  limits: number[] = [5, 10, 25, 50, 100, 500]
   limit: number = this.limits[1]
 
   constructor(private poke$: GetAllPokemonsService, private sprite$: GetPokemonSpriteService, private router: Router) { }
@@ -28,16 +28,17 @@ export class PokemonsListComponent implements OnInit {
 
   get next() {
     if (!this._next)  {
-      return {
-        offset: 0,
-        limit: this.limit
-      }
+      return undefined
     }
     const p = new URLSearchParams(this._next.split('?').pop())
     return {
       offset: +p.get('offset'),
       limit: this.limit !== +p.get('limit') ? this.limit : +p.get('limit')
     }
+  }
+
+  get count() {
+    return this._count
   }
 
   ngOnInit(): void {

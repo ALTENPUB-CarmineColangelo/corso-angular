@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {pokeApi} from "../utils/utils";
-import {PokemonDetailApi} from "../interfaces/PokemonDetailApi";
-import {PokemonSpeciesApi} from "../interfaces/PokemonSpeciesApi";
+import {PokemonDetailApi, PokemonSpeciesApi} from "../interfaces/PokemonDetailApi";
 
 @Injectable({
   providedIn: 'root'

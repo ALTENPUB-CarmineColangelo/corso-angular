@@ -1,0 +1,11 @@
+<div>
+  <h3>{{typeTitle}}</h3>
+  <div class="row row-cols-2 row-cols-sm-3 g-2">
+    <div class="col" *ngFor="let typeName of typeNames">
+      <span class="badge fs-6 fw-normal me-2 w-100" [ngClass]="['pk-type-'+typeName]">{{getType(typeName)}}</span>
+    </div>
+  </div>
+</div>
+
+
+

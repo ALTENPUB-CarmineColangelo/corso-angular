@@ -10,7 +10,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3">
           <label for="pokemons_per_page" class="form-label">Risultati</label>
-          <h3>{{list.length}}</h3>
+          <h3>{{list.length}} di {{count}}</h3>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="mt-5 text-center">
-    <button *ngIf="!loading" class="btn btn-outline-primary" (click)="nextPage()">Carica altri pokemon</button>
+    <button *ngIf="!loading && next" class="btn btn-outline-primary" (click)="nextPage()">Carica altri pokemon</button>
     <div *ngIf="loading" class="p-3 animate__animated animate__bounce animate__infinite">
       <i class="bi-cloud-download-fill"></i>
     </div>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit } from '@angular/core';
-import {CustomDetails} from "../../interfaces/PokemonDetailApi";
+import {PokemonDetails} from "../../views/pokemon-detail/PokemonDetail.interface";
 
 @Component({
   selector: 'app-details-card',
@@ -8,7 +8,7 @@ import {CustomDetails} from "../../interfaces/PokemonDetailApi";
 })
 export class DetailsCardComponent implements OnInit {
 
-  @Input() details: CustomDetails
+  @Input() details: PokemonDetails
 
   constructor() { }
 

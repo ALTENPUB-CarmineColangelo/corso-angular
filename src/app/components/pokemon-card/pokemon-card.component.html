@@ -4,7 +4,7 @@
     [alt]="'Thumbnail '+pokemon.name"
     [src]="pokemon.image">
   <div class="card-body text-center">
-    <h3 class="lead mb-4">{{pokemon.name | titlecase }}</h3>
-    <button type="button" class="btn btn-primary d-block w-100" (click)="onViewDetail(pokemon.id)">Dettagli</button>
+    <h3 class="lead mb-4">n.{{pokemon.id}} {{pokemon.name | titlecase }}</h3>
+    <button type="button" class="btn btn-primary d-block w-100" [disabled]="+pokemon.id > 898" (click)="onViewDetail(pokemon.id)">Dettagli</button>
   </div>
 </div>

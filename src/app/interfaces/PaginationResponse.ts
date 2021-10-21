@@ -1,6 +1,6 @@
 import {BaseResponse} from "./BaseResponse";
 
-export interface PokemonListItemApi {
+export interface PaginationResponse {
   count: number;
   next: string;
   previous: string;

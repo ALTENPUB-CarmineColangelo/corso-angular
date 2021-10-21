@@ -13,6 +13,8 @@ import { StatsCardComponent } from './components/stats-card/stats-card.component
 import { DetailsCardComponent } from './components/details-card/details-card.component';
 import { DescriptionSectionComponent } from './components/description-section/description-section.component';
 import { TranslateStatPipe } from './pipes/translate-stat.pipe';
+import { TypeBadgeComponent } from './components/type-badge/type-badge.component';
+import { SpriteGalleryComponent } from './components/sprite-gallery/sprite-gallery.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TranslateStatPipe } from './pipes/translate-stat.pipe';
     StatsCardComponent,
     DetailsCardComponent,
     DescriptionSectionComponent,
-    TranslateStatPipe
+    TranslateStatPipe,
+    TypeBadgeComponent,
+    SpriteGalleryComponent
   ],
   imports: [
     AppRoutingModule,

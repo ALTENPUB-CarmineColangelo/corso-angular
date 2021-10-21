@@ -4,6 +4,11 @@
     <option *ngFor="let ftxt of it_flavor_text; let i = index" [value]="i">{{i + 1}}. {{ftxt.version.name | titlecase}}</option>
   </select>
 </div>
-<p *ngIf="flavor_text" class="fs-4">
-  {{flavor_text}}
-</p>
+<figure *ngIf="flavor_text">
+  <blockquote class="blockquote">
+    <p>{{flavor_text}}</p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    Versione del gioco <cite [title]="it_flavor_text[selectedVersion].version.name">{{it_flavor_text[selectedVersion].version.name | titlecase}}</cite>
+  </figcaption>
+</figure>

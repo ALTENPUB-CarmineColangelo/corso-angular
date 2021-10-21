@@ -16,33 +16,33 @@ interface PokemonGenderApi {
 })
 export class GetPokemonGenderService {
 
-  private _females: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([])
-  private _males: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([])
-  private _genderlesses: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([])
+  private _females: string[] = []
+  private _males: string[] = []
+  private _genderlesses: string[] = []
 
   constructor(private http: HttpClient) { }
 
   getPokemonGender(): void {
     this.http.get(`${pokeApi}/gender/female`).subscribe((res: PokemonGenderApi) => {
-      this._females.next(res.pokemon_species_details.map(x => x.pokemon_species.name))
+      this._females = res.pokemon_species_details.map(x => x.pokemon_species.name)
     })
     this.http.get(`${pokeApi}/gender/male`).subscribe((res: PokemonGenderApi) => {
-      this._males.next(res.pokemon_species_details.map(x => x.pokemon_species.name))
+      this._males = res.pokemon_species_details.map(x => x.pokemon_species.name)
     })
     this.http.get(`${pokeApi}/gender/genderless`).subscribe((res: PokemonGenderApi) => {
-      this._genderlesses.next(res.pokemon_species_details.map(x => x.pokemon_species.name))
+      this._genderlesses = res.pokemon_species_details.map(x => x.pokemon_species.name)
     })
   }
 
   getGender(name: string): Genders[] | undefined {
     let genders: Genders[] | undefined = []
-    if (this._females.value.includes(name)) {
+    if (this._females.includes(name)) {
       genders.push('female')
     }
-    if (this._males.value.includes(name)) {
+    if (this._males.includes(name)) {
       genders.push('male')
     }
-    if (this._genderlesses.value.includes(name)) {
+    if (this._genderlesses.includes(name)) {
       genders.push('genderless')
     }
     if (genders.length === 0) {

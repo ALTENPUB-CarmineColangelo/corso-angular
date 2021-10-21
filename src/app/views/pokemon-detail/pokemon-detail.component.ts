@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GetPokemonDetailService} from "../../services/get-pokemon-detail.service";
-import {CustomDetails, PokemonDetailApi, Stats} from "../../interfaces/PokemonDetailApi";
+import {PokemonDetailApi, PokemonSpeciesApi} from "../../interfaces/PokemonDetailApi";
 import {GetPokemonSpriteService} from "../../services/get-pokemon-sprite.service";
-import {PokemonSpeciesApi} from "../../interfaces/PokemonSpeciesApi";
 import {GetPokemonGenderService} from "../../services/get-pokemon-gender.service";
-import {BaseResponse} from "../../interfaces/BaseResponse";
+import {PokemonDetails} from "./PokemonDetail.interface";
+import {GetPokemonTypesService} from "../../services/get-pokemon-types.service";
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -20,26 +20,29 @@ export class PokemonDetailComponent implements OnInit {
   species: PokemonSpeciesApi
 
   constructor(
+    private pokeType$: GetPokemonTypesService,
     private pokeGender$: GetPokemonGenderService,
     private pokeDetail$: GetPokemonDetailService,
     private pokeSprite$: GetPokemonSpriteService,
     private route: ActivatedRoute) { }
 
-  get gallery(): { key: string; src: string }[] {
-    return Object.keys(this.pokemon.sprites).filter(key => !['other', 'versions'].includes(key)).map(key => ({
+  get galleryFront(): { key: string; src: string }[] {
+    return Object.keys(this.pokemon.sprites).filter(key => key.includes('front')).map(key => ({
       key, src: this.pokemon.sprites[key]
     })).filter(({src}) => src != null)
   }
 
-  get types(): string[] {
-    return this.pokemon.types.map(key => key.type.name)
+  get galleryBack(): { key: string; src: string }[] {
+    return Object.keys(this.pokemon.sprites).filter(key => key.includes('back')).map(key => ({
+      key, src: this.pokemon.sprites[key]
+    })).filter(({src}) => src != null)
   }
 
   get category(): string {
     return this.species.genera.filter(gen => gen.language.name === 'it')[0].genus
   }
 
-  get details(): CustomDetails {
+  get details(): PokemonDetails {
     return {
       height: this.pokemon.height,
       weight: this.pokemon.weight,
@@ -52,8 +55,21 @@ export class PokemonDetailComponent implements OnInit {
     }
   }
 
-  get stats(): Stats[] {
-    return this.pokemon.stats
+  get types(): string[] {
+    return this.pokemon.types.map(type => type.type.name)
+  }
+
+  get damagingTypes(): string[] {
+    const damageTypes = []
+    this.pokemon.types.forEach(type => {
+      const form = this.pokeType$.types[type.type.name]
+      if (form) {
+        form.double_damage_from.forEach(damage => {
+          if (!damageTypes.includes(damage)) damageTypes.push(damage)
+        })
+      }
+    })
+    return damageTypes
   }
 
   ngOnInit(): void {
@@ -71,10 +87,7 @@ export class PokemonDetailComponent implements OnInit {
   getSpecies() {
     this.pokeDetail$.getPokemonSpecies(this.pokemon.id).subscribe((result) => {
       this.species = result
-      console.log({species: this.species})
       this.loading = false
-      console.log(this.details)
     })
   }
-
 }

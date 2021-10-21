@@ -28,26 +28,25 @@
           <app-details-card [details]="details"></app-details-card>
         </section>
         <section id="tipo" class="mb-3">
-          <h3>Tipo</h3>
-          <div>
-            <span class="badge fs-5 bg-primary me-2" *ngFor="let type of types">{{type}}</span>
-          </div>
+          <app-type-badge typeTitle="Tipo" [typeNames]="types"></app-type-badge>
+        </section>
+        <section id="debolezza" class="mb-3" *ngIf="damagingTypes">
+          <app-type-badge typeTitle="Debolezza" [typeNames]="damagingTypes"></app-type-badge>
         </section>
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <div class="row row-cols-1 row-cols-md-2">
-      <div class="col" *ngFor="let pic of gallery">
-        <div class="card bg-dark text-white">
-          <img class="card-img" [src]="pic.src" alt="Card image">
-          <div class="card-img-overlay">
-            <h5 class="card-title">{{pic.key}}</h5>
-          </div>
-        </div>
+  <div class="container" *ngIf="galleryFront && galleryBack">
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+      <div class="col">
+        <app-sprite-gallery title="Sprites Frontali" [gallery]="galleryFront"></app-sprite-gallery>
+      </div>
+      <div class="col">
+        <app-sprite-gallery title="Sprites Posteriori" [gallery]="galleryBack"></app-sprite-gallery>
       </div>
     </div>
+
   </div>
 
 </div>

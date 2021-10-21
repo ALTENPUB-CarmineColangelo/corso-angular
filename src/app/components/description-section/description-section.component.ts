@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {FlavorTextEntries} from "../../interfaces/PokemonSpeciesApi";
+import {FlavorTextEntries} from "../../interfaces/PokemonDetailApi";
 
 @Component({
   selector: 'app-description-section',
