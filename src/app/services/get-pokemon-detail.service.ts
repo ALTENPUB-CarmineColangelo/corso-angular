@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {pokeApi} from "../utils/utils";
 import {PokemonDetailApi} from "../interfaces/PokemonDetailApi";
+import {PokemonSpeciesApi} from "../interfaces/PokemonSpeciesApi";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,11 @@ export class GetPokemonDetailService {
 
   constructor(private http: HttpClient) { }
 
-  getPokemonDetail(id: string): Observable<PokemonDetailApi> {
+  getPokemonDetail(id: string|number): Observable<PokemonDetailApi> {
     return this.http.get(`${pokeApi}/pokemon/${id}`) as Observable<PokemonDetailApi>
   }
 
+  getPokemonSpecies(id:string|number): Observable<PokemonSpeciesApi> {
+    return this.http.get(`${pokeApi}/pokemon-species/${id}`) as Observable<PokemonSpeciesApi>
+  }
 }

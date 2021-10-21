@@ -9,6 +9,10 @@ import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.com
 import {PokemonsListComponent} from "./views/pokemons-list/pokemons-list.component";
 import {ProfileComponent} from "./views/profile/profile.component";
 import { PokemonDetailComponent } from './views/pokemon-detail/pokemon-detail.component';
+import { StatsCardComponent } from './components/stats-card/stats-card.component';
+import { DetailsCardComponent } from './components/details-card/details-card.component';
+import { DescriptionSectionComponent } from './components/description-section/description-section.component';
+import { TranslateStatPipe } from './pipes/translate-stat.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { PokemonDetailComponent } from './views/pokemon-detail/pokemon-detail.co
     PokemonCardComponent,
     PokemonsListComponent,
     ProfileComponent,
-    PokemonDetailComponent
+    PokemonDetailComponent,
+    StatsCardComponent,
+    DetailsCardComponent,
+    DescriptionSectionComponent,
+    TranslateStatPipe
   ],
   imports: [
     AppRoutingModule,

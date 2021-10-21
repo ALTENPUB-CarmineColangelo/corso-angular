@@ -1,0 +1,9 @@
+figure {
+  --bg: white;
+  background-image: radial-gradient(var(--bg) -60%, var(--bs-light) 60%);
+  height: 250px;
+}
+figure img {
+  object-fit: contain;
+  height: 100%;
+}

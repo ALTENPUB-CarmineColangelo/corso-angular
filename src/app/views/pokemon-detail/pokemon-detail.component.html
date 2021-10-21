@@ -1,18 +1,54 @@
+<div *ngIf="loading">
+  <div class="display-1">Caricamento...</div>
+</div>
+
 <div *ngIf="!loading">
-  <div class="d-flex flex-column justify-content-end text-center" [ngStyle]="{ background: 'url('+mainPic+') no-repeat bottom center', paddingTop: '25%', backgroundSize: 'contain'}">
+  <header class="mb-4 text-center">
     <h1 class="display-1">
       {{pokemon.name | titlecase}}
     </h1>
+    <h5 class="d-block text-muted">n°{{pokemon.id}}</h5>
+  </header>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-2">
+      <div class="col">
+        <figure [style]="{'--bg': species.color.name}">
+          <img [src]="mainPic" [alt]="pokemon.name" class="img-fluid w-100 mb-3">
+        </figure>
+        <section id="statistiche" class="mb-3">
+          <app-stats-card [stats]="pokemon.stats"></app-stats-card>
+        </section>
+      </div>
+      <div class="col">
+        <section id="descrizione" class="mb-3">
+          <app-description-section [flavorEntries]="species.flavor_text_entries"></app-description-section>
+        </section>
+        <hr class="my-5">
+        <section id="dettagli" class="mb-3">
+          <app-details-card [details]="details"></app-details-card>
+        </section>
+        <section id="tipo" class="mb-3">
+          <h3>Tipo</h3>
+          <div>
+            <span class="badge fs-5 bg-primary me-2" *ngFor="let type of types">{{type}}</span>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
-  <div class="row row-cols-2 row-cols-sm-4 row-cols-lg-6 g-3 flex-nowrap overflow-auto flex-row-reverse justify-content-center">
-    <div class="col" *ngFor="let pic of gallery">
-      <div class="card bg-dark text-white">
-        <img class="card-img" [src]="pic.src" alt="Card image">
-        <div class="card-img-overlay">
-          <h5 class="card-title">{{pic.key}}</h5>
+
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-2">
+      <div class="col" *ngFor="let pic of gallery">
+        <div class="card bg-dark text-white">
+          <img class="card-img" [src]="pic.src" alt="Card image">
+          <div class="card-img-overlay">
+            <h5 class="card-title">{{pic.key}}</h5>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 

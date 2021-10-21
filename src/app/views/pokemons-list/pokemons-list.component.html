@@ -1,5 +1,30 @@
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-  <div class="col" *ngFor="let pokemon of list">
-    <app-pokemon-card [pokemon]="pokemon" (viewPokemonDetail)="viewDetails($event)"></app-pokemon-card>
+<div class="container">
+  <div class="controller card mb-5 position-sticky border-0 rounded-0">
+    <div class="card-body">
+      <div class="row justify-content-between">
+        <div class="col-12 col-md-6 col-lg-3">
+          <label for="pokemons_per_page" class="form-label">Pokemon per pagina</label>
+          <select class="form-select" id="pokemons_per_page" name="pokemons_per_page" [(ngModel)]="limit">
+            <option *ngFor="let l of limits" [value]="l">{{l}}</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+          <label for="pokemons_per_page" class="form-label">Risultati</label>
+          <h3>{{list.length}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+    <div class="col" *ngFor="let pokemon of list">
+      <app-pokemon-card [pokemon]="pokemon" (viewPokemonDetail)="viewDetails($event)"></app-pokemon-card>
+    </div>
+  </div>
+  <div class="mt-5 text-center">
+    <button *ngIf="!loading" class="btn btn-outline-primary" (click)="nextPage()">Carica altri pokemon</button>
+    <div *ngIf="loading" class="p-3 animate__animated animate__bounce animate__infinite">
+      <i class="bi-cloud-download-fill"></i>
+    </div>
   </div>
 </div>
+

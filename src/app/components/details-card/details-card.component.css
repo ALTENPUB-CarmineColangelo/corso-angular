@@ -1,0 +1,9 @@
+[class*=bi-gender] {
+  font-size: 24px;
+}
+.bi-gender-female {
+  color: var(--bs-pink);
+}
+.bi-gender-male {
+  color: var(--bs-blue);
+}

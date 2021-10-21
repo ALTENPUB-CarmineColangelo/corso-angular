@@ -11,8 +11,8 @@ export class GetAllPokemonsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPokemons(limit: number = 10): Observable<PokemonListItemApi> {
-    return this.http.get(`${pokeApi}/pokemon?limit=${limit}`) as Observable<PokemonListItemApi>
+  getAllPokemons(offset: number = 0, limit: number = 10): Observable<PokemonListItemApi> {
+    return this.http.get(`${pokeApi}/pokemon?offset=${offset}&limit=${limit}`) as Observable<PokemonListItemApi>
   }
 
   retrieveIdFromUrl(url: string) {

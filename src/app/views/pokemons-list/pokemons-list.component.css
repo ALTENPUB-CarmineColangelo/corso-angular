@@ -1,0 +1,8 @@
+.controller {
+  top: 0;
+  z-index: 200;
+}
+.bi-cloud-download-fill {
+  font-size: 24px;
+  color: var(--bs-primary);
+}

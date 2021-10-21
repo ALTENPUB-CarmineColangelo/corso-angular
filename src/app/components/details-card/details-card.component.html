@@ -1,0 +1,30 @@
+<div *ngIf="details" class="card">
+  <div class="card-body">
+    <div class="row row-cols-2">
+      <div class="col">
+        <dl>
+          <dt>Altezza</dt>
+          <dd class="lead">{{details.height / 10 | number: '1.1-2'}} m</dd>
+          <dt>Peso</dt>
+          <dd class="lead">{{details.weight / 10 | number: '1.1-2'}} kg</dd>
+          <dt>Sesso</dt>
+          <dd class="lead">
+            <i class="bi-gender-female" *ngIf="details.genders?.includes('female')"></i>
+            <i class="bi-gender-male" *ngIf="details.genders?.includes('male')"></i>
+            <span *ngIf="!details.genders || details.genders?.includes('genderless')">Sconosciuto</span>
+          </dd>
+        </dl>
+      </div>
+      <div class="col">
+        <dl>
+          <dt>Categoria</dt>
+          <dd class="lead">{{details.category}}</dd>
+          <dt>Abilità</dt>
+          <dd class="lead">
+            <span class="d-block" *ngFor="let a of details.abilities">{{a.ability.name | titlecase}}</span>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

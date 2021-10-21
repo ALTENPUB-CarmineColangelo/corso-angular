@@ -1,17 +1,18 @@
 import {BaseResponse} from "./BaseResponse";
+import {Genders} from "./Genders";
 
-interface Ability {
+export interface Ability {
   is_hidden: boolean,
   slot: number,
   ability: BaseResponse
 }
 
-interface GameIndex {
+export interface GameIndex {
   game_index: number,
   version: BaseResponse
 }
 
-interface HeldItem {
+export interface HeldItem {
   item: BaseResponse,
   version_details: {
     rarity: number,
@@ -19,7 +20,7 @@ interface HeldItem {
   }[]
 }
 
-interface Move {
+export interface Move {
   move: BaseResponse,
   version_group_details: {
     level_learned_at: number,
@@ -28,7 +29,7 @@ interface Move {
   }[]
 }
 
-interface Stat {
+export interface Stats {
   base_stat: number,
   effort: number,
   stat: BaseResponse
@@ -47,9 +48,20 @@ export interface Sprites {
 
 export type TSprites = keyof Sprites
 
-interface Type {
+export interface Type {
   slot: number,
   type: BaseResponse
+}
+
+export interface CustomDetails {
+  height: number
+  weight: number
+  abilities: Ability[]
+  category: string
+  genders?: Genders[]
+  is_baby: boolean
+  is_legendary: boolean
+  is_mythical: boolean
 }
 
 export interface PokemonDetailApi {
@@ -68,6 +80,6 @@ export interface PokemonDetailApi {
   moves: Move[],
   species: BaseResponse,
   sprites: Sprites,
-  stats: Stat[],
+  stats: Stats[],
   types: Type[]
 }
