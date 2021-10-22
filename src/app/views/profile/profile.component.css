@@ -1,0 +1,24 @@
+
+.container {
+  min-height: 100%;
+}
+
+.profile-card {
+  min-width: 300px;
+}
+.container img {
+   max-width: 480px;
+}
+
+.starter-block {
+  margin: auto;
+  width: 150px;
+  height: 150px;
+  border: 5px solid var(--bs-gray-500);
+  background: var(--bs-gray-100);
+  box-shadow: 0 0 16px rgba(0,0,0,0.15);
+}
+.starter {
+  width: 100%;
+  transform: scale(1.25);
+}

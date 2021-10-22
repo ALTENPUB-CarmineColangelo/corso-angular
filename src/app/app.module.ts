@@ -15,6 +15,10 @@ import { DescriptionSectionComponent } from './components/description-section/de
 import { TranslateStatPipe } from './pipes/translate-stat.pipe';
 import { TypeBadgeComponent } from './components/type-badge/type-badge.component';
 import { SpriteGalleryComponent } from './components/sprite-gallery/sprite-gallery.component';
+import { RadialGradientDirective } from './directives/radial-gradient.directive';
+import { TranslateCategoryPipe } from './pipes/translate-category.pipe';
+import { LoaderComponent } from './components/loader/loader.component';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { SpriteGalleryComponent } from './components/sprite-gallery/sprite-galle
     DescriptionSectionComponent,
     TranslateStatPipe,
     TypeBadgeComponent,
-    SpriteGalleryComponent
+    SpriteGalleryComponent,
+    RadialGradientDirective,
+    TranslateCategoryPipe,
+    LoaderComponent,
+    LogoComponent
   ],
   imports: [
     AppRoutingModule,

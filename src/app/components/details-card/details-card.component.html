@@ -18,7 +18,7 @@
       <div class="col">
         <dl>
           <dt>Categoria</dt>
-          <dd class="lead">{{details.category}}</dd>
+          <dd class="lead">{{details.category | translateCategory}}</dd>
           <dt>Abilità</dt>
           <dd class="lead">
             <span class="d-block" *ngFor="let a of details.abilities">{{a.ability.name | titlecase}}</span>

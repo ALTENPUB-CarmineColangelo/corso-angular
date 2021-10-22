@@ -8,14 +8,14 @@ import {PokemonListItem} from "../../views/pokemons-list/PokemonListItem.interfa
 })
 export class PokemonCardComponent implements OnInit {
   @Input() pokemon: PokemonListItem
-  @Output() viewPokemonDetail = new EventEmitter<string>();
+  @Output() viewPokemonDetail = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onViewDetail(id: string) {
+  onViewDetail(id: number) {
     this.viewPokemonDetail.emit(id);
   }
 }

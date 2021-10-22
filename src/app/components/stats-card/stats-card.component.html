@@ -2,8 +2,8 @@
   <div class="card-body">
     <div class="row row-cols-6 gx-2">
       <div class="col" *ngFor="let stat of stats">
-        <div class="d-flex flex-column justify-content-end bg-light" [style]="{ height: 50*5+'px'}">
-          <div [ngStyle]="{ height: stat.base_stat+'px'}" class="bg-primary"></div>
+        <div class="d-flex flex-column justify-content-end column" style="height: 250px;">
+          <div [style.height]="stat.base_stat+'px'" [ngStyle]="{ backgroundColor: color ?? 'var(--bs-danger)'}" class="border-top border-dark"></div>
         </div>
         <div class="text-center lh-1 fw-bold small mt-2">
           {{stat.stat.name | translateStat | titlecase}}

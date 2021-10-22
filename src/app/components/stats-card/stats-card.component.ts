@@ -8,6 +8,7 @@ import {PokemonDetailApi, Stats} from "../../interfaces/PokemonDetailApi";
 })
 export class StatsCardComponent implements OnInit {
   @Input() stats: Stats[]
+  @Input() color: string
 
   constructor() { }
 

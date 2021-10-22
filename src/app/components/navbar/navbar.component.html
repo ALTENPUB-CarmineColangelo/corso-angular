@@ -1,19 +1,19 @@
 <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light px-5">
-    <a class="navbar-brand" href="#">Pokedex</a>
-    <button class="navbar-toggler" type="button" (click)="onToggleMenuOpened()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" [class.show]="menuOpened" id="navbarSupportedContent">
-
-        <ul class="navbar-nav mr-auto">
-          <li *ngFor="let item of menuItems" class="nav-item active">
-            <a class="nav-link" routerLinkActive="active"
-               [routerLink]="item.path">{{item.label}}</a>
-          </li>
-        </ul>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand text-danger" href="#">
+        <app-logo></app-logo>
+        Pokedex
+      </a>
+      <ul class="nav mr-auto">
+        <li *ngFor="let item of menuItems" class="nav-item active">
+          <a class="nav-link" routerLinkActive="active" [title]="item.label"
+             [routerLink]="item.path">
+            <i [ngClass]="'bi-'+item.icon"></i>
+            <span class="d-none d-md-inline-block ms-md-2">{{item.label}}</span>
+          </a>
+        </li>
+      </ul>
     </div>
-
   </nav>
 </div>

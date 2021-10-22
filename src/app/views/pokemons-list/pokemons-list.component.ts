@@ -4,6 +4,7 @@ import {GetPokemonSpriteService} from "../../services/get-pokemon-sprite.service
 import {Router} from "@angular/router";
 import {BaseResponse} from "../../interfaces/BaseResponse";
 import {PokemonListItem} from "./PokemonListItem.interface";
+import {LAST_POKEMON_ID_AVAILABLE} from "../../utils/utils";
 
 @Component({
   selector: 'app-home',
@@ -12,22 +13,35 @@ import {PokemonListItem} from "./PokemonListItem.interface";
 })
 export class PokemonsListComponent implements OnInit {
 
-  private _pokemonList: PokemonListItem[] = []
-  _count: number;
-  _next: string;
-  _previous: string;
+  private _count: number;
+  private _next: string;
+  private _previous: string;
+  private _pokemonList: BaseResponse[] = []
+
   loading: boolean = false
   limits: number[] = [5, 10, 25, 50, 100, 500]
   limit: number = this.limits[1]
+  isLargeGrid: boolean = true
+  lastPokemonIdAvailable = LAST_POKEMON_ID_AVAILABLE
 
   constructor(private poke$: GetAllPokemonsService, private sprite$: GetPokemonSpriteService, private router: Router) { }
 
-  get list() {
+  get pokemonListItem(): PokemonListItem[] {
     return this._pokemonList
+      .map(item => {
+        const id = this.poke$.retrieveIdFromUrl(item.url);
+        const image = this.sprite$.getSprite(id)
+        return { ...item, id, image }
+      })
+  }
+
+  get list(): PokemonListItem[] {
+    return this.pokemonListItem
+      .filter(({id}) => id <= LAST_POKEMON_ID_AVAILABLE)
   }
 
   get next() {
-    if (!this._next)  {
+    if (!this._next || this.list.length >= this.lastPokemonIdAvailable)  {
       return undefined
     }
     const p = new URLSearchParams(this._next.split('?').pop())
@@ -37,38 +51,32 @@ export class PokemonsListComponent implements OnInit {
     }
   }
 
-  get count() {
-    return this._count
-  }
-
   ngOnInit(): void {
-    this.updateList()
+    this.poke$.pokemonsList.subscribe(response => {
+      if (!response) return this.updateList()
+      this._count = response.count;
+      this._next = response.next;
+      this._previous = response.previous;
+      this._pokemonList = response.results
+    }, error => console.log(error))
+    this.poke$.pokemonsListLoading.subscribe(loading => {
+      this.loading = loading
+    })
   }
 
-  viewDetails(id: string) {
+  viewDetails(id: number) {
     this.router.navigate([`/pokemon/${id}`])
   }
 
   updateList(offset: number = 0, limit: number= 10) {
-    this.loading = true
-    this.poke$.getAllPokemons(offset, limit).subscribe((result) => {
-      this._count = result.count;
-      this._next = result.next;
-      this._previous = result.previous;
-      this.setList(result.results)
-      this.loading = false
-    })
+    this.poke$.getAllPokemons(offset, limit)
   }
 
   nextPage() {
     this.updateList(this.next.offset, this.next.limit)
   }
 
-  setList(results: BaseResponse[]) {
-    this._pokemonList = this._pokemonList.concat(results.map(item => {
-      const id = this.poke$.retrieveIdFromUrl(item.url);
-      const image = this.sprite$.getSprite(id)
-      return { ...item, id, image }
-    }))
+  setLargeGrid(isLarge: boolean) {
+    this.isLargeGrid = isLarge
   }
 }

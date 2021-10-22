@@ -1,22 +1,39 @@
 <div *ngIf="loading">
-  <div class="display-1">Caricamento...</div>
-</div>
-
-<div *ngIf="!loading">
   <header class="mb-4 text-center">
     <h1 class="display-1">
-      {{pokemon.name | titlecase}}
+      Caricamento...
     </h1>
-    <h5 class="d-block text-muted">n°{{pokemon.id}}</h5>
+    <div class="m-auto" style="max-width: 40px">
+      <app-loader [size]="56"></app-loader>
+    </div>
+  </header>
+</div>
+
+<div *ngIf="!loading && pokemon">
+  <header class="mb-4">
+    <div class="container d-flex align-items-center">
+      <button class="btn btn-outline-secondary border-0" (click)="prevPokemon()" title="Pokémon precedente">
+        <i class="bi-arrow-left-short"></i>
+      </button>
+      <div class="flex-grow-1 text-center ">
+        <h1 class="display-1 mb-0">
+          {{pokemon.name | titlecase}}
+        </h1>
+        <h5 class="fw-light text-muted">n°{{pokemon.id}}</h5>
+      </div>
+      <button class="btn btn-outline-secondary border-0" (click)="nextPokemon()" title="Pokémon successivo">
+        <i class="bi-arrow-right-short"></i>
+      </button>
+    </div>
   </header>
   <div class="container">
     <div class="row row-cols-1 row-cols-md-2">
-      <div class="col">
-        <figure [style]="{'--bg': species.color.name}">
+      <div class="col" *ngIf="pokemonColor">
+        <figure [appRadialGradient]="pokemonColor">
           <img [src]="mainPic" [alt]="pokemon.name" class="img-fluid w-100 mb-3">
         </figure>
         <section id="statistiche" class="mb-3">
-          <app-stats-card [stats]="pokemon.stats"></app-stats-card>
+          <app-stats-card [stats]="pokemon.stats" [color]="pokemonColor"></app-stats-card>
         </section>
       </div>
       <div class="col">
@@ -51,3 +68,19 @@
 
 </div>
 
+<div *ngIf="error">
+  <div class="container mt-5">
+    <div class="row g-2 g-md-5 align-items-center">
+      <div class="col-12 col-md-4 order-2 order-md-1">
+        <img src="https://assets.pokemon.com/static2/_ui/img/global/psyduck.png" alt="Pagina non trovata" class="img-fluid w-100">
+      </div>
+      <div class="col-12 col-md-8 order-1 order-md-2 text-center text-md-start">
+        <div class="display-4 my-5">Nessun Pokémon trovato!</div>
+        <p class="mb-3">
+          Sei sicuro che esista il Pokémon con l'id <b>{{id}}</b>?
+        </p>
+        <a target="_blank" [href]="'https://www.pokemon.com/it/pokedex/'+id">Verifica</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -28,7 +28,8 @@ export class GetPokemonTypesService {
         double_damage_from: result.damage_relations.double_damage_from.map(x => x.name),
         id: result.id,
         name: result.name,
-        name_it: result.names.find(lang => lang.language.name === 'it').name
+        name_it: result.names.find(lang => lang.language.name === 'it').name,
+        pokemons: result.pokemon.map(p => p.pokemon)
       }
     })
   }

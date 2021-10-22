@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {GetPokemonDetailService} from "../../services/get-pokemon-detail.service";
 import {PokemonDetailApi, PokemonSpeciesApi} from "../../interfaces/PokemonDetailApi";
 import {GetPokemonSpriteService} from "../../services/get-pokemon-sprite.service";
 import {GetPokemonGenderService} from "../../services/get-pokemon-gender.service";
 import {PokemonDetails} from "./PokemonDetail.interface";
 import {GetPokemonTypesService} from "../../services/get-pokemon-types.service";
+import {LAST_POKEMON_ID_AVAILABLE} from "../../utils/utils";
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -14,8 +15,10 @@ import {GetPokemonTypesService} from "../../services/get-pokemon-types.service";
 })
 export class PokemonDetailComponent implements OnInit {
 
+  id: number
   pokemon: PokemonDetailApi
   loading: boolean = false
+  error: Error
   mainPic: string
   species: PokemonSpeciesApi
 
@@ -24,6 +27,7 @@ export class PokemonDetailComponent implements OnInit {
     private pokeGender$: GetPokemonGenderService,
     private pokeDetail$: GetPokemonDetailService,
     private pokeSprite$: GetPokemonSpriteService,
+    private router: Router,
     private route: ActivatedRoute) { }
 
   get galleryFront(): { key: string; src: string }[] {
@@ -36,6 +40,10 @@ export class PokemonDetailComponent implements OnInit {
     return Object.keys(this.pokemon.sprites).filter(key => key.includes('back')).map(key => ({
       key, src: this.pokemon.sprites[key]
     })).filter(({src}) => src != null)
+  }
+
+  get pokemonColor(): string {
+    return this.species.color.name
   }
 
   get category(): string {
@@ -75,11 +83,15 @@ export class PokemonDetailComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true
     this.route.params.subscribe(params => {
+      this.id = params.id
       this.pokeDetail$.getPokemonDetail(params.id).subscribe((result) => {
         this.pokemon = result
         this.mainPic = this.pokeSprite$.getPokedexPic(this.pokemon.id, 'full')
         console.log({pokemon: this.pokemon})
         this.getSpecies()
+      }, error => {
+        this.error = error
+        this.loading = false
       })
     })
   }
@@ -89,5 +101,15 @@ export class PokemonDetailComponent implements OnInit {
       this.species = result
       this.loading = false
     })
+  }
+
+  nextPokemon() {
+    const nextId = this.pokemon.id === LAST_POKEMON_ID_AVAILABLE ? 1 : this.pokemon.id + 1
+    this.router.navigate(['pokemon/'+nextId])
+  }
+
+  prevPokemon() {
+    const prevId = this.pokemon.id === 1 ? LAST_POKEMON_ID_AVAILABLE : this.pokemon.id - 1
+    this.router.navigate(['pokemon/'+prevId])
   }
 }

@@ -1,9 +1,13 @@
 figure {
-  --bg: white;
-  background-image: radial-gradient(var(--bg) -60%, var(--bs-light) 60%);
   height: 250px;
+  transition: all .3s;
+  background-color: var(--bs-light);
 }
 figure img {
   object-fit: contain;
   height: 100%;
+  transition: all .3s;
+}
+figure:hover img {
+  transform: scale(1.125);
 }

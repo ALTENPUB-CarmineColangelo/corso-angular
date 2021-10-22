@@ -31,7 +31,7 @@ export class GetPokemonSpriteService {
     }
   }
 
-  getSprite(id: string, type: TSprites = 'front_default') {
+  getSprite(id: string|number, type: TSprites = 'front_default') {
     return `${this._defaultUrl}${this._getSpriteVariant(type)}${id}.png`
   }
 

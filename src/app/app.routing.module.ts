@@ -10,15 +10,16 @@ export interface AppRoutes {
   label?: string
   component?: any
   inMenu?: boolean
+  icon?: string
   redirectTo?: string
   pathMatch?: string
 }
 
 export const appRoutes: AppRoutes[] = [
   { id: 'index', path: '', redirectTo: 'pokemon', pathMatch: 'full'},
-  { id: 'pokemonsList', path: 'pokemon', label: 'Lista Pokemon', component: PokemonsListComponent, inMenu: true },
+  { id: 'pokemonsList', path: 'pokemon', label: 'Lista Pokemon', component: PokemonsListComponent, inMenu: true, icon: 'list-ul' },
   { id: 'pokemonDetail', path: 'pokemon/:id', label: 'Pokemon', component: PokemonDetailComponent },
-  { id: 'profile', path: 'profile', label: 'Profilo', component: ProfileComponent, inMenu: true },
+  { id: 'profile', path: 'profile', label: 'Profilo', component: ProfileComponent, inMenu: true, icon: 'person-fill' },
 ]
 
 const routes: Route[] = appRoutes.map(route => {

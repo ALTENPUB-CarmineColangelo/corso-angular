@@ -1,1 +1,58 @@
-<p>profile works!</p>
+
+<div class="container pt-5 d-flex flex-column justify-content-between align-items-center">
+  <div *ngIf="!isLogged; else elseBlock" class="card profile-card mx-auto">
+    <div class="card-body">
+      <form #login="ngForm" (ngSubmit)="submit(login)" class="row row-cols-1 gy-3">
+
+        <div class="col form-group">
+          <label for="nickname" class="form-label">Inserisci il tuo Nickname</label>
+          <input ngModel #nickname="ngModel" name="nickname" type="text" class="form-control" id="nickname" required>
+          <div class="form-text text-danger" *ngIf="nickname.touched && !nickname.valid">Inserisci il Nickname</div>
+        </div>
+
+        <div class="col form-group">
+          <label for="starter" class="form-label">Seleziona il tuo Starter</label>
+          <select id="starter" class="form-select" ngModel name="starter" #starter="ngModel" required>
+            <option value="-1">Scegli il tuo starter</option>
+            <option *ngFor="let pokemon of starters" [value]="pokemon.id">{{pokemon.label | titlecase}}</option>
+          </select>
+          <div class="form-text text-danger" *ngIf="starter.touched && starter.value === '-1'">Scegli almeno uno Starter</div>
+        </div>
+
+        <div class="col form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="isMajor" ngModel name="isMajor" #isMajor="ngModel">
+            <label class="form-check-label" for="isMajor">
+              Sei maggiorenne?
+            </label>
+          </div>
+        </div>
+
+        <div class="col form-group">
+          <button type="submit" class="btn btn-primary">Registrati!</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="card profile-card mx-auto">
+      <div class="card-body text-center">
+        <div class="rounded-circle starter-block">
+          <img [src]="myStarter.pic" [alt]="myStarter.name" class="starter">
+        </div>
+        <div class="display-3">{{nickname}}</div>
+        <div class="mb-3">
+          <span class="badge bg-secondary">{{myStarter.name}}</span>
+        </div>
+        <div class="mb-3">
+          <i [ngClass]="[isMajor ? 'bi-calendar-check-fill': 'bi-calendar-fill']"></i> {{isMajor ? 'Maggiorenne':'Minorenne'}}
+        </div>
+
+        <hr>
+        <button class="btn btn-outline-primary" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <img src="https://assets.pokemon.com/static2/_ui/img/account/pokemon-login.png" alt="login" class="w-100 img-fluid m-auto">
+</div>

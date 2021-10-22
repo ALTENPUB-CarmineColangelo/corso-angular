@@ -1,10 +1,15 @@
-<div class="card box-shadow">
+<div class="card box-shadow position-relative">
+  <div class="position-absolute pt-3 pe-3 top-0 end-0">
+    <span class="badge bg-info">
+      n.{{pokemon.id}}
+    </span>
+  </div>
   <img
     class="card-img-top d-block w-100"
-    [alt]="'Thumbnail '+pokemon.name"
+    [alt]="'thumb '+pokemon.name"
     [src]="pokemon.image">
-  <div class="card-body text-center">
-    <h3 class="lead mb-4">n.{{pokemon.id}} {{pokemon.name | titlecase }}</h3>
+  <div class="card-body text-center" [title]="pokemon.name | titlecase">
+    <h3 class="lead mb-2">{{pokemon.name | titlecase }}</h3>
     <button type="button" class="btn btn-primary d-block w-100" [disabled]="+pokemon.id > 898" (click)="onViewDetail(pokemon.id)">Dettagli</button>
   </div>
 </div>
