@@ -2,23 +2,23 @@
   <div class="controller card mb-3 mb-md-5 position-sticky border-0 rounded-0">
     <div class="card-body">
       <div class="row align-items-end gy-3">
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-md-3">
           <label for="pokemons_per_page" class="form-label">Pokemon per pagina</label>
           <select class="form-select" id="pokemons_per_page" name="pokemons_per_page" [(ngModel)]="limit">
             <option *ngFor="let l of limits" [value]="l">{{l}}</option>
           </select>
         </div>
-        <div class="col-12 col-lg-3">
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-primary" (click)="setLargeGrid(true)">
-              <i [ngClass]="[isLargeGrid ? 'bi-grid-fill':'bi-grid']"></i>
+        <div class="col-12 col-md-7">
+          <div class="btn-group">
+            <button type="button" class="btn" [ngClass]="[isLargeGrid ? ' btn-primary': ' btn-outline-primary']" (click)="setLargeGrid(true)" title="Griglia a immagini grandi">
+              <i [ngClass]="[isLargeGrid ? 'bi-grid-fill':'bi-grid']"></i> <span class="d-none d-md-inline-block ms-2">Griglia a immagini grandi</span>
             </button>
-            <button type="button" class="btn btn-outline-primary" (click)="setLargeGrid(false)">
-              <i [ngClass]="[!isLargeGrid ? 'bi-grid-3x3-gap-fill': 'bi-grid-3x3-gap']"></i>
+            <button type="button" class="btn" [ngClass]="[!isLargeGrid ? ' btn-primary': ' btn-outline-primary']" (click)="setLargeGrid(false)" title="Griglia a immagini piccole">
+              <i [ngClass]="[!isLargeGrid ? 'bi-grid-3x3-gap-fill': 'bi-grid-3x3-gap']"></i> <span class="d-none d-md-inline-block ms-2">Griglia a immagini piccole</span>
             </button>
           </div>
         </div>
-        <div class="col-12 col-lg-3 ms-auto text-lg-end">
+        <div class="col-12 col-md-2 ms-auto text-lg-end">
           <span class="text-muted">Risultati {{list.length}} di {{lastPokemonIdAvailable}}</span>
         </div>
       </div>

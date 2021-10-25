@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GetAllPokemonsService} from "../../services/get-all-pokemons.service";
 import {GetPokemonSpriteService} from "../../services/get-pokemon-sprite.service";
 import {Router} from "@angular/router";
 import {BaseResponse} from "../../interfaces/BaseResponse";
 import {PokemonListItem} from "./PokemonListItem.interface";
 import {LAST_POKEMON_ID_AVAILABLE} from "../../utils/utils";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-home',
   templateUrl: './pokemons-list.component.html',
   styleUrls: ['./pokemons-list.component.css']
 })
-export class PokemonsListComponent implements OnInit {
+export class PokemonsListComponent implements OnInit, OnDestroy {
 
   private _count: number;
   private _next: string;
   private _previous: string;
   private _pokemonList: BaseResponse[] = []
+  private _pokemonsListSub: Subscription
+  private _pokemonsListLoadingSub: Subscription
 
   loading: boolean = false
   limits: number[] = [5, 10, 25, 50, 100, 500]
@@ -52,16 +55,21 @@ export class PokemonsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.poke$.pokemonsList.subscribe(response => {
+    this._pokemonsListSub = this.poke$.pokemonsList.subscribe(response => {
       if (!response) return this.updateList()
       this._count = response.count;
       this._next = response.next;
       this._previous = response.previous;
       this._pokemonList = response.results
     }, error => console.log(error))
-    this.poke$.pokemonsListLoading.subscribe(loading => {
+    this._pokemonsListLoadingSub = this.poke$.pokemonsListLoading.subscribe(loading => {
       this.loading = loading
     })
+  }
+
+  ngOnDestroy(): void {
+    this._pokemonsListSub.unsubscribe()
+    this._pokemonsListLoadingSub.unsubscribe()
   }
 
   viewDetails(id: number) {
