@@ -107,7 +107,6 @@ export class PokemonDetailComponent implements OnInit {
     this.pokeDetail$.getPokemonSpecies(this.pokemon.id).subscribe((result) => {
       this.species = result
       this.loading = false
-      console.log({ details: this.details})
     })
   }
 

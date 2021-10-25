@@ -44,7 +44,6 @@ export class ProfileComponent implements OnInit {
   }
 
   submit(x) {
-    console.log(x.form.controls)
     const profile: Profile = {
       nickname: x.form.controls.nickname.value,
       starter: Number(x.form.controls.starter.value),
