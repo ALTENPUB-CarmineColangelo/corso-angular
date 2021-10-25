@@ -1,14 +1,15 @@
 <div class="input-group input-group-sm mb-3">
   <label class="input-group-text" for="descrizione_versione">Edizione</label>
   <select class="form-select" id="descrizione_versione" [(ngModel)]="selectedVersion">
-    <option *ngFor="let ftxt of it_flavor_text; let i = index" [value]="i">{{i + 1}}. {{ftxt.version.name | titlecase}}</option>
+    <option *ngFor="let ftxt of filtered_flavor_text; let i = index" [value]="i">{{i + 1}}. {{ftxt.version.name | titlecase}}</option>
   </select>
 </div>
-<figure *ngIf="flavor_text">
+<figure *ngIf="flavor_text" [title]="'Versione del testo: '+language.value">
   <blockquote class="blockquote">
     <p>{{flavor_text}}</p>
   </blockquote>
   <figcaption class="blockquote-footer">
-    Versione del gioco <cite [title]="it_flavor_text[selectedVersion].version.name">{{it_flavor_text[selectedVersion].version.name | titlecase}}</cite>
+    Versione del gioco <cite [title]="filtered_flavor_text[selectedVersion].version.name">{{filtered_flavor_text[selectedVersion].version.name | titlecase}}</cite>,
+    <cite>{{language.label}}</cite>
   </figcaption>
 </figure>

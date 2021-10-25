@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="row row-cols-2">
       <div class="col">
-        <dl>
+        <dl class="mb-0">
           <dt>Altezza</dt>
           <dd class="lead">{{details.height / 10 | number: '1.1-2'}} m</dd>
           <dt>Peso</dt>
@@ -16,7 +16,7 @@
         </dl>
       </div>
       <div class="col">
-        <dl>
+        <dl class="mb-0">
           <dt>Categoria</dt>
           <dd class="lead">{{details.category | translateCategory}}</dd>
           <dt>Abilità</dt>
@@ -26,5 +26,10 @@
         </dl>
       </div>
     </div>
+  </div>
+  <div class="card-footer" *ngIf="details.is_baby || details.is_legendary || details.is_mythical">
+    <span *ngIf="details.is_baby" class="badge bg-info">🍼 cucciolo</span>
+    <span *ngIf="details.is_legendary" class="badge bg-warning">⭐ leggendario</span>
+    <span *ngIf="details.is_mythical" class="badge bg-danger">🌟 mitico</span>
   </div>
 </div>

@@ -13,16 +13,16 @@
   <header class="mb-4">
     <div class="container d-flex align-items-center">
       <button class="btn btn-outline-secondary border-0" (click)="prevPokemon()" title="Pokémon precedente">
-        <i class="bi-arrow-left-short"></i>
+        <i class="bi-caret-left-fill"></i> <span class="d-none d-md-inline-block ms-2">n. {{prevId}}</span>
       </button>
       <div class="flex-grow-1 text-center ">
         <h1 class="display-1 mb-0">
           {{pokemon.name | titlecase}}
         </h1>
-        <h5 class="fw-light text-muted">n°{{pokemon.id}}</h5>
+        <h5 class="fw-light text-muted">n. {{pokemon.id}}</h5>
       </div>
       <button class="btn btn-outline-secondary border-0" (click)="nextPokemon()" title="Pokémon successivo">
-        <i class="bi-arrow-right-short"></i>
+        <span class="d-none d-md-inline-block me-2">n. {{nextId}}</span> <i class="bi-caret-right-fill"></i>
       </button>
     </div>
   </header>
@@ -40,7 +40,7 @@
         <section id="descrizione" class="mb-3">
           <app-description-section [flavorEntries]="species.flavor_text_entries"></app-description-section>
         </section>
-        <hr class="my-5">
+        <hr class="mt-5 ">
         <section id="dettagli" class="mb-3">
           <app-details-card [details]="details"></app-details-card>
         </section>

@@ -50,6 +50,14 @@ export class PokemonDetailComponent implements OnInit {
     return this.species.genera.filter(gen => gen.language.name === 'it')[0].genus
   }
 
+  get nextId(): number {
+    return this.pokemon.id === LAST_POKEMON_ID_AVAILABLE ? 1 : this.pokemon.id + 1
+  }
+
+  get prevId(): number {
+    return this.pokemon.id === 1 ? LAST_POKEMON_ID_AVAILABLE : this.pokemon.id - 1
+  }
+
   get details(): PokemonDetails {
     return {
       height: this.pokemon.height,
@@ -87,7 +95,6 @@ export class PokemonDetailComponent implements OnInit {
       this.pokeDetail$.getPokemonDetail(params.id).subscribe((result) => {
         this.pokemon = result
         this.mainPic = this.pokeSprite$.getPokedexPic(this.pokemon.id, 'full')
-        console.log({pokemon: this.pokemon})
         this.getSpecies()
       }, error => {
         this.error = error
@@ -100,16 +107,17 @@ export class PokemonDetailComponent implements OnInit {
     this.pokeDetail$.getPokemonSpecies(this.pokemon.id).subscribe((result) => {
       this.species = result
       this.loading = false
+      console.log({ details: this.details})
     })
   }
 
   nextPokemon() {
-    const nextId = this.pokemon.id === LAST_POKEMON_ID_AVAILABLE ? 1 : this.pokemon.id + 1
-    this.router.navigate(['pokemon/'+nextId])
+    this.loading = true
+    this.router.navigate(['pokemon/'+this.nextId])
   }
 
   prevPokemon() {
-    const prevId = this.pokemon.id === 1 ? LAST_POKEMON_ID_AVAILABLE : this.pokemon.id - 1
-    this.router.navigate(['pokemon/'+prevId])
+    this.loading = true
+    this.router.navigate(['pokemon/'+this.prevId])
   }
 }
